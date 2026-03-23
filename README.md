@@ -51,3 +51,20 @@ The controller stores DMX values in an XORed form. The key is another in-memory 
 
 ```python
 dmx_value = raw_byte ^ key_byte
+```
+
+## Art-Net Protocol and Validation
+
+Art-Net is an industry-standard protocol used for transporting DMX512 data over Ethernet using UDP.
+
+### External Proof of Concept
+To verify the functionality and accuracy of the bridge, **ArtNetominator** (a free external diagnostic tool) is utilized to monitor network traffic.This provides independent verification that the data extracted and decrypted from the target process is being broadcast correctly as standard ArtDMX packets.
+
+![External Validation via ArtNetominator](images/image_3.png)
+
+The ArtNetominator interface confirms several key points:
+* Packet Reception**: The software successfully detects incoming Art-Net traffic from the local machine.
+* Data Integrity**: The DMX channel values displayed in the grid match the levels set in the source controller, proving the XOR decryption is accurate.
+* Real-time Performance**: The packets are delivered with consistent timing, making the data available for any other lighting software or media server on the network.
+
+---
